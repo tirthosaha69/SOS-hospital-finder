@@ -1,0 +1,177 @@
+[
+    {
+        "hospital_name": "Medical College & Hospital Kolkata",
+        "address": "Government teaching hospital College St, College Square, Kolkata 700 001",
+        "phone_number": "033-2255-1621"
+    },
+    {
+        "hospital_name": "SSKM Medical College & Hospital",
+        "address": "SSKM Hospital Road, Bhowanipore, Kolkata, West Bengal 700 071",
+        "phone_number": "033-2204-1100"
+    },
+    {
+        "hospital_name": "Nil Ratan Sircar Medical College & Hospital",
+        "address": "138, Acharya Jagdish Chandra Bose Road, Sealdah, Raja Bazar, Kolkata, West Bengal 700 014",
+        "phone_number": "033-2286-0033"
+    },
+    {
+        "hospital_name": "Chittaranjan National Cancer Institue (CNCI) Public cancer research & care (Hazra Campus)",
+        "address": "37, S.P. Mukherjee Road, Kolkata-700 026, near Jatin Das Park Metro Station",
+        "phone_number": "033-2475-9313"
+    },
+    {
+        "hospital_name": "Chittaranjan National Cancer Institue (CNCI) Public cancer research & care (New Town Campus)",
+        "address": "Street No: 299, DJ Block, Action Area-1D,. Newtown, Kolkata-700 160",
+        "phone_number": "033-2324-5015"
+    },
+    {
+        "hospital_name": "Vivekananda Institue of Medical Sciences (VIMS) Kolkata",
+        "address": "99, Sarat Bose Rd, Hazra, Kalighat, Kolkata, West Bengal 700 026",
+        "phone_number": "+91 33 2475 3636-3639"
+    },
+    {
+        "hospital_name": "Belle Vue Clinic",
+        "address": "9, Dr. U. N. Brahmachari Street(Formerly Loudon Street), Kolkata - 700 017, West Bengal, India",
+        "phone_number": "(033)-6688 8888"
+    },
+    {
+        "hospital_name": "Apollo Gleneagles Multi-Speciality Hospital Kolkata",
+        "address": "58, Canal Circular Road, Kolkata, West Bengal, 700054",
+        "phone_number": "+91 33 4420 2122"
+    },
+    {
+        "hospital_name": "Medica Superspeciality Hospital",
+        "address": "127, Eastern Metropolitan Bypass, Nitai Nagar, Mukundapur, Kolkata, West Bengal 700 099",
+        "phone_number": "07041464392"
+    },
+    {
+        "hospital_name": "Fortis Hospital, Anandpur, Kolkata",
+        "address": "730, Eastern Metropolitan Bypass, Anandapur, East Kolkata Twp, Kolkata, West Bengal, India, 700 107",
+        "phone_number": "+91-9289678787"
+    },
+    {
+        "hospital_name": "Ruby General Hospital",
+        "address": "Kasba, Golpark, E M Byapass, Kolkata West Bengal - 700 107",
+        "phone_number": "(+91)-(33)-66011800"
+    },
+    {
+        "hospital_name": "Manipal Hospitals - Broadway",
+        "address": "J C Block, Plot No 16 & 17, Salt Lake City Sector 3, Kolkata - 700 106",
+        "phone_number": "08460298605"
+    },
+    {
+        "hospital_name": "Manipal Hospitals - Dhakuria",
+        "address": "P 4 & 5, Block A, Gariahat Road, Kolkata South, Kolkata - 700 029 (Near Dhakuria Bridge, Dhakuria)",
+        "phone_number": "08460293032"
+    },
+    {
+        "hospital_name": "Manipal Hospitals - Mukundapur",
+        "address": "AMRI, 230, Barkohala Lane, Mukundapur, Kolkata - 700 099 (Behind Metro Cash and Carry)",
+        "phone_number": "08867794426"
+    },
+    {
+        "hospital_name": "Rabindranath Tagore International Institute of Cardiac Sciences, Kolkata",
+        "address": "Premises No: 1489, 124, Eastern Metropolitan Bypass, Mukundapur Market, Stadium Colony, Mukundapur, Kolkata, West Bengal 700 099",
+        "phone_number": "080675 06860"
+    },
+    {
+        "hospital_name": "Charnock Hospital",
+        "address": "BMC 195, Biswa Bangla Sarani, Dhalipara, Tegharia, Newtown, Kolkata, West Bengal 700 157",
+        "phone_number": "033 4050 0500"
+    },
+    {
+        "hospital_name": "Woodlands Multispeciality Hospital",
+        "address": "8/5, Alipore Rd, Alipore, Kolkata, West Bengal 700 027",
+        "phone_number": "033 4033 7000"
+    },
+    {
+        "hospital_name": "Peerless Hospital",
+        "address": "360, Panchasayar Rd, Sahid Smirity Colony, Pancha Sayar, Kolkata, West Bengal 700 094",
+        "phone_number": "033 4011 1222"
+    },
+    {
+        "hospital_name": "Calcutta Medical Research Institute (CMRI)",
+        "address": "7, 2, Diamond Harbour Rd, New Alipore, Kolkata, West Bengal 700 027",
+        "phone_number": "080 6213 6596"
+    },
+    {
+        "hospital_name": "IRIS Multispeciality Hospital",
+        "address": "82/1, Raja Subodh Chandra Mallick Rd, Vidyasagar Colony, Ganguly Bagan, Kolkata, West Bengal 700 047",
+        "phone_number": "033 6609 6000"
+    },
+    {
+        "hospital_name": "HCG Cancer Hospital",
+        "address": "Premises No. 03, Plot DG-4, 358, Action Area 1D, Newtown, Kolkata, West Bengal 700 156",
+        "phone_number": "063588 88825"
+    },
+    {
+        "hospital_name": "Institute of Neurosciences",
+        "address": "185, Acharya Jagdish Chandra Bose Rd, Elgin, Kolkata, West Bengal 700 017",
+        "phone_number": "033 4030 9999"
+    },
+    {
+        "hospital_name": "Tata Medical Centre",
+        "address": "14, MAR(E-W), DH Block(Newtown), Action Area I, Rajarhat, New Town, Kolkata, West Bengal 700 160",
+        "phone_number": "033 6605 7000"
+    },
+    {
+        "hospital_name": "Beleghata Id & Bg Hospital",
+        "address": "Plot No 57, Near Cit Phool Bagan, Beliaghata Main Road, Beliaghata-700 010",
+        "phone_number": "033 2303 2248"
+    },
+    {
+        "hospital_name": "Institute of Child Health",
+        "address": "11, Dr Biresh Guha St, Park Circus, Ballygunge, Kolkata, West Bengal 700 017",
+        "phone_number": "090730 60117"
+    },
+    {
+        "hospital_name": "J.B.Roy Ayurvedic Medical College & Hospital",
+        "address": "170-172, Raja Dinendra St, Fariapukur, Shyam Bazar, Kolkata, West Bengal 700 004",
+        "phone_number": "033 2554 5418"
+    },
+    {
+        "hospital_name": "Zenith Super Specialist Hospital",
+        "address": "9 3, Feeder Rd, Rathtala, Belghoria, Kolkata, West Bengal 700 056",
+        "phone_number": "+91-7605098081"
+    },
+    {
+        "hospital_name": "RG Stone Urology & Laparoscopy Hospital",
+        "address": "Orbit Heights, 33, Gariahat Rd S, Dhakuria, Selimpur, Jodhpur Park, Kolkata, West Bengal 700 031",
+        "phone_number": "033 4027 1000"
+    },
+    {
+        "hospital_name": "MIOT Hospitals",
+        "address": "47/G, Kala Mandir, Shakespeare Sarani, Mullick Bazar, Park Street area, Kolkata, West Bengal 700 017",
+        "phone_number": "084204 07798"
+    },
+    {
+        "hospital_name": "Glocal Healthcare Systems",
+        "address": "Ecospace, 3B-207, AA II, Newtown, New Town, Kolkata, West Bengal 700 156",
+        "phone_number": "033 4600 0450"
+    },
+    {
+        "hospital_name": "Kothari Medical Centre",
+        "address": "8/3, Alipore Rd, Alipore, Kolkata, West Bengal 700 027",
+        "phone_number": "033 4012 7000"
+    },
+    {
+        "hospital_name": "Anandalok Charitable Hospital",
+        "address": "WATER TANK, Acharya Prafulla Chandra Bhavan, 91, 8NO, DK Block, Sector II, Bidhannagar, Kolkata, West Bengal 700 091",
+        "phone_number": "033 2359 6618"
+    },
+    {
+        "hospital_name": "Sambhunath Pandit Hospital",
+        "address": "11, Elgin Rd, Sreepally, Bhowanipore, Kolkata, West Bengal 700 020",
+        "phone_number": "033 2302 2820"
+    },
+    {
+        "hospital_name": "R G Kar Medical College & Hospital",
+        "address": "1, Khudiram Bose Sarani, Bidhan Sarani, Shyam Bazar, Kolkata, West Bengal 700 004",
+        "phone_number": "033 2555 7656"
+    },
+    {
+        "hospital_name": "M R Bangur Hospital",
+        "address": "249, Deshpran Sasmal Rd, Netajinagar, Rajendra Prasad Colony, Tollygunge, Kolkata, West Bengal 700 033",
+        "phone_number": "033 2473 3354"
+    }
+]

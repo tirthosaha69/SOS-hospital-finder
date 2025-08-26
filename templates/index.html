@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0f0f0f">
+    <link rel="apple-touch-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23dc2626'/><text x='50' y='60' text-anchor='middle' fill='white' font-size='40'>🚨</text></svg>">
+    <title>SOS Hospital Finder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0d1117 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background particles */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(220, 38, 38, 0.1);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            33% {
+                transform: translateY(-20px) rotate(120deg);
+            }
+
+            66% {
+                transform: translateY(10px) rotate(240deg);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .app-title {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #dc2626, #ef4444, #f87171);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .app-subtitle {
+            font-size: 1.2rem;
+            color: #9ca3af;
+            font-weight: 400;
+        }
+
+        .status-card {
+            background: rgba(31, 41, 55, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(75, 85, 99, 0.3);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .status-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.6);
+        }
+
+        .location-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .location-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .location-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f3f4f6;
+        }
+
+        .location-status {
+            font-size: 1rem;
+            color: #9ca3af;
+            line-height: 1.6;
+            padding-left: 2rem;
+        }
+
+        .loading {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .loading-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(156, 163, 175, 0.3);
+            border-top: 2px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .sos-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 3rem 0;
+        }
+
+        .sos-button {
+            position: relative;
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            border: none;
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 0 0 0 rgba(220, 38, 38, 0.7),
+                0 25px 50px -12px rgba(220, 38, 38, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            overflow: hidden;
+            opacity: 0.7;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .sos-button:hover {
+            transform: scale(1.05);
+            box-shadow:
+                0 0 0 20px rgba(220, 38, 38, 0),
+                0 32px 64px -12px rgba(220, 38, 38, 0.4);
+        }
+
+        .sos-button:active {
+            transform: scale(0.95);
+        }
+
+        .sos-button.pulsing {
+            animation: sosPulse 2s infinite;
+        }
+
+        @keyframes sosPulse {
+            0% {
+                box-shadow:
+                    0 0 0 0 rgba(220, 38, 38, 0.7),
+                    0 25px 50px -12px rgba(220, 38, 38, 0.3);
+            }
+
+            70% {
+                box-shadow:
+                    0 0 0 30px rgba(220, 38, 38, 0),
+                    0 25px 50px -12px rgba(220, 38, 38, 0.3);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 0 0 rgba(220, 38, 38, 0),
+                    0 25px 50px -12px rgba(220, 38, 38, 0.3);
+            }
+        }
+
+        .sos-icon {
+            font-size: 3rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .sos-text {
+            font-size: 1.25rem;
+            letter-spacing: 0.1em;
+        }
+
+        .sos-subtext {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .emergency-tip {
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 12px;
+            text-align: center;
+            color: #fca5a5;
+            font-size: 0.9rem;
+        }
+
+        .hospitals-section {
+            margin-top: 3rem;
+        }
+
+        .hospitals-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hospitals-icon {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #059669, #047857);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .hospitals-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f3f4f6;
+        }
+
+        .hospitals-list {
+            display: grid;
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .hospital-card {
+            background: rgba(31, 41, 55, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(75, 85, 99, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-100px);
+            opacity: 0;
+            animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .hospital-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .hospital-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .hospital-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .hospital-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .hospital-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .hospital-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(34, 197, 94, 0.4);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .hospital-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #22c55e;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hospital-address {
+            color: #d1d5db;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .hospital-phone {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #60a5fa;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .hospital-phone:hover {
+            color: #93c5fd;
+        }
+
+        .phone-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            padding: 2rem;
+        }
+
+        /* Mobile-first responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                max-width: 100%;
+            }
+
+            .app-title {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .app-subtitle {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .sos-button {
+                width: 160px;
+                height: 160px;
+                font-size: 1.2rem;
+            }
+
+            .sos-icon {
+                font-size: 2.5rem;
+            }
+
+            .status-card,
+            .hospital-card {
+                padding: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .location-status {
+                font-size: 0.9rem;
+                padding-left: 1.5rem;
+            }
+
+            .emergency-tip {
+                margin-top: 1rem;
+                padding: 0.75rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .hospitals-title {
+                font-size: 1.3rem;
+            }
+
+            .hospital-name {
+                font-size: 1.1rem;
+            }
+
+            .hospital-address,
+            .hospital-phone {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0.75rem;
+            }
+
+            .app-title {
+                font-size: 2rem;
+            }
+
+            .app-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .sos-button {
+                width: 140px;
+                height: 140px;
+                font-size: 1.1rem;
+            }
+
+            .sos-icon {
+                font-size: 2rem;
+            }
+
+            .sos-text {
+                font-size: 1.1rem;
+            }
+
+            .sos-subtext {
+                font-size: 0.75rem;
+            }
+
+            .status-card,
+            .hospital-card {
+                padding: 1rem;
+                border-radius: 16px;
+            }
+
+            .location-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .location-status {
+                padding-left: 0;
+                font-size: 0.85rem;
+            }
+
+            .hospitals-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .hospital-card {
+                padding: 1rem;
+            }
+
+            .hospital-name {
+                font-size: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+
+            .hospital-address {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+
+            .hospital-phone {
+                font-size: 0.8rem;
+                flex-wrap: wrap;
+            }
+
+            .emergency-tip {
+                font-size: 0.75rem;
+                line-height: 1.4;
+            }
+        }
+
+        /* Touch-friendly interactions */
+        @media (hover: none) and (pointer: coarse) {
+            .sos-button {
+                transform: none;
+            }
+
+            .sos-button:active {
+                transform: scale(0.95);
+                transition: transform 0.1s;
+            }
+
+            .hospital-card:hover {
+                transform: none;
+            }
+
+            .hospital-card:active {
+                transform: scale(0.98);
+                transition: transform 0.1s;
+            }
+        }
+
+        /* Improve text readability on mobile */
+        @media (max-width: 480px) {
+            body {
+                font-size: 16px;
+                /* Prevents zoom on iOS */
+                -webkit-text-size-adjust: 100%;
+            }
+
+            input,
+            button,
+            textarea {
+                font-size: 16px;
+                /* Prevents zoom on iOS */
+            }
+        }
+
+        /* Safe area handling for notched devices */
+        @supports (padding: max(0px)) {
+            .container {
+                padding-left: max(1rem, env(safe-area-inset-left));
+                padding-right: max(1rem, env(safe-area-inset-right));
+                padding-top: max(2rem, env(safe-area-inset-top));
+                padding-bottom: max(2rem, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated background particles -->
+    <div class="bg-particles" id="particles"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="app-title">SOS Hospital Finder</h1>
+            <p class="app-subtitle">Emergency medical assistance at your fingertips</p>
+        </div>
+
+        <div class="status-card">
+            <div class="location-header">
+                <div class="location-icon">📍</div>
+                <h2 class="location-title">Your Current Location</h2>
+            </div>
+            <div class="location-status" id="location">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    Detecting your location...
+                </div>
+            </div>
+        </div>
+
+        <div class="sos-container">
+            <button class="sos-button" id="sosBtn">
+                <span class="sos-icon">🚨</span>
+                <span class="sos-text">SOS</span>
+                <span class="sos-subtext">Emergency</span>
+            </button>
+
+            <div class="emergency-tip">
+                <strong>In case of life-threatening emergency, call emergency services immediately</strong><br>
+                This tool helps find nearby hospitals for urgent medical care
+            </div>
+        </div>
+
+        <div class="hospitals-section">
+            <div class="hospitals-header">
+                <div class="hospitals-icon">🏥</div>
+                <h3 class="hospitals-title">Nearby Hospitals</h3>
+            </div>
+            <ul class="hospitals-list" id="hospitalList">
+                <div class="empty-state">Click the SOS button to find nearby hospitals</div>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let userAddress = "";
+
+        // Create animated background particles
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const particleCount = 15;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = (Math.random() * 4 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                particles.appendChild(particle);
+            }
+        }
+
+        // Initialize particles
+        createParticles();
+
+        // Enhanced mobile geolocation with better error handling
+        function getCurrentLocation() {
+            const locationElement = document.getElementById("location");
+
+            if (!navigator.geolocation) {
+                locationElement.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.5rem; color: #ef4444;">
+                        <span>⚠</span>
+                        <span>Geolocation is not supported by this device.</span>
+                    </div>
+                `;
+                return;
+            }
+
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 15000,
+                maximumAge: 300000 // 5 minutes
+            };
+
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    fetch('/get_address', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            lat: position.coords.latitude,
+                            lon: position.coords.longitude
+                        })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            userAddress = data.full_address;
+                            locationElement.innerHTML = `
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #22c55e;">✓</span>
+                                    <span>${data.full_address}</span>
+                                </div>
+                            `;
+
+                            // Enable SOS button once location is found
+                            document.getElementById("sosBtn").style.opacity = "1";
+                        })
+                        .catch(error => {
+                            console.error('Error getting address:', error);
+                            locationElement.innerHTML = `
+                                <div style="display: flex; align-items: center; gap: 0.5rem; color: #f59e0b;">
+                                    <span>⚠</span>
+                                    <span>Location detected but address lookup failed. You can still use SOS.</span>
+                                </div>
+                            `;
+                        });
+                },
+                function (error) {
+                    console.error('Geolocation error:', error);
+                    let errorMessage = '';
+
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            errorMessage = "Location access denied. Please enable location services in your browser settings.";
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            errorMessage = "Location information unavailable. Please check your GPS or internet connection.";
+                            break;
+                        case error.TIMEOUT:
+                            errorMessage = "Location request timed out. Please try refreshing the page.";
+                            break;
+                        default:
+                            errorMessage = "Unable to get your location. Please try again.";
+                            break;
+                    }
+
+                    locationElement.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 0.5rem; color: #ef4444;">
+                            <span>⚠</span>
+                            <span>${errorMessage}</span>
+                        </div>
+                        <button onclick="getCurrentLocation()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: #374151; border: none; border-radius: 8px; color: white; cursor: pointer;">
+                            🔄 Try Again
+                        </button>
+                    `;
+                },
+                options
+            );
+        }
+
+        // Get live location
+        getCurrentLocation();
+
+        // SOS button click
+        document.getElementById("sosBtn").addEventListener("click", function () {
+            const button = this;
+            const hospitalList = document.getElementById("hospitalList");
+
+            if (!userAddress) {
+                alert("Location not detected yet. Please wait a moment and try again.");
+                return;
+            }
+
+            // Add pulsing animation and update button state
+            button.classList.add("pulsing");
+            button.innerHTML = `
+                <span class="sos-icon">⏳</span>
+                <span class="sos-text">Searching...</span>
+                <span class="sos-subtext">Finding hospitals</span>
+            `;
+            button.disabled = true;
+
+            // Show loading state in hospital list
+            hospitalList.innerHTML = `
+                <div class="empty-state">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        Searching for nearby hospitals...
+                    </div>
+                </div>
+            `;
+
+            fetch('/get_hospitals', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ address: userAddress })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    // Reset button state
+                    button.classList.remove("pulsing");
+                    button.innerHTML = `
+                        <span class="sos-icon">🚨</span>
+                        <span class="sos-text">SOS</span>
+                        <span class="sos-subtext">Emergency</span>
+                    `;
+                    button.disabled = false;
+
+                    // Clear and populate hospital list
+                    hospitalList.innerHTML = "";
+
+                    if (data.hospitals && data.hospitals.length > 0) {
+                        data.hospitals.forEach((h, index) => {
+                            const li = document.createElement("li");
+                            li.className = "hospital-card";
+                            li.innerHTML = `
+                                <div class="hospital-name">
+                                    🏥 ${h.hospital_name || h.name || 'Hospital'}
+                                </div>
+                                <div class="hospital-address">
+                                    📍 ${h.address || 'Address not available'}
+                                </div>
+                                <a href="tel:${h.phone_number || h.phone || ''}" class="hospital-phone">
+                                    <svg class="phone-icon" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                                    </svg>
+                                    ${h.phone_number || h.phone || 'Phone not available'}
+                                </a>
+                            `;
+                            hospitalList.appendChild(li);
+                        });
+                    } else {
+                        hospitalList.innerHTML = `
+                            <div class="empty-state">
+                                No hospitals found nearby. Please try again or contact emergency services.
+                            </div>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching hospitals:', error);
+
+                    // Reset button state
+                    button.classList.remove("pulsing");
+                    button.innerHTML = `
+                        <span class="sos-icon">🚨</span>
+                        <span class="sos-text">SOS</span>
+                        <span class="sos-subtext">Emergency</span>
+                    `;
+                    button.disabled = false;
+
+                    hospitalList.innerHTML = `
+                        <div class="empty-state" style="color: #ef4444;">
+                            ⚠ Error finding hospitals. Please check your connection and try again.
+                        </div>
+                    `;
+                });
+        });
+    </script>
+</body>
+
+</html>

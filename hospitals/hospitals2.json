@@ -1,0 +1,62 @@
+[
+    {
+        "hospital_name": "AMRI Hospitals - Dhakuria",
+        "address": "P-4 & 5, Gariahat Road, Dhakuria, Kolkata, West Bengal 700029",
+        "phone_number": "033 6680 0000"
+    },
+    {
+        "hospital_name": "AMRI Hospitals - Mukundapur",
+        "address": "230, Barakhola Lane, Purba Jadavpur, Mukundapur, Kolkata, West Bengal 700099",
+        "phone_number": "033 6680 0000"
+    },
+    {
+        "hospital_name": "AMRI Hospitals - Salt Lake",
+        "address": "JC-16 & 17, Salt Lake City, Sector III, Kolkata, West Bengal 700098",
+        "phone_number": "033 6680 0000"
+    },
+    {
+        "hospital_name": "ILS Hospitals - Dumdum",
+        "address": "1, Mall Road, Near Nagerbazar Flyover, Dumdum, Kolkata, West Bengal 700080",
+        "phone_number": "033 4031 5000"
+    },
+    {
+        "hospital_name": "ILS Hospitals - Salt Lake",
+        "address": "DD-6, Salt Lake, Sector-I, Kolkata, West Bengal 700064",
+        "phone_number": "033 4020 6500"
+    },
+    {
+        "hospital_name": "B.P. Poddar Hospital & Medical Research Ltd.",
+        "address": "71/1, Humayun Kabir Sarani, New Alipore, Kolkata, West Bengal 700053",
+        "phone_number": "033 2456 7075"
+    },
+    {
+        "hospital_name": "Nightingale Hospital",
+        "address": "11, Shakespeare Sarani, Mullick Bazar, Kolkata, West Bengal 700071",
+        "phone_number": "033 2287 7050"
+    },
+    {
+        "hospital_name": "Bellevue Nursing Home",
+        "address": "9A, Dr. U. N. Brahmachari Street, Elgin, Kolkata, West Bengal 700017",
+        "phone_number": "033 2287 2321"
+    },
+    {
+        "hospital_name": "Park Clinic",
+        "address": "4, Gorky Terrace, AJC Bose Road, Kolkata, West Bengal 700017",
+        "phone_number": "033 2287 3891"
+    },
+    {
+        "hospital_name": "ESI Hospital - Sealdah",
+        "address": "25, Narkeldanga Main Road, Near Sealdah, Kolkata, West Bengal 700011",
+        "phone_number": "033 2360 6124"
+    },
+    {
+        "hospital_name": "ESI Hospital - Maniktala",
+        "address": "Kankurgachi Main Road, Maniktala, Kolkata, West Bengal 700054",
+        "phone_number": "033 2355 7456"
+    },
+    {
+        "hospital_name": "ESIC PGIMSR & Medical College, Joka",
+        "address": "Diamond Harbour Road, Joka, Kolkata, West Bengal 700104",
+        "phone_number": "033 2467 2791"
+    }
+]
